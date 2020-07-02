@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <title>Park Station App</title> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- CONEXION SOCKET IO -->
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="/rfid.js" ></script>  
+     <!-- BOOTSTRAP 4 -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--FONT AWESONE-->
+    <script src="https://kit.fontawesome.com/27464e646d.js" crossorigin="anonymous"></script>
+    <!-- CUSTOM CSS-->
+    <link rel="stylesheet" href="/css/main.css">
+    <!--CSS ANIMATE -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container ">
+      <a class="navbar-brand" href="#">ParkStation App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i>Inicio</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/mapa"><i class="fas fa-map-marker-alt"></i>Mapa LR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/NuevoUsuario"> <i class="fas fa-user"></i>Nuevo Usuario</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/usuarios"><i class="fas fa-users"></i></i>Usuarios</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  
+
+
+  <Style>
+    #map{
+        height: 100%;  
+        max-width : none;
+    }
+    html,body{
+        height: 70%;
+        margin: 0;
+        padding: 0;
+    }
+    
+</Style>
+
+<div id="map"> </div>
+        
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_BBQRjJEuExnlqjbdMve543sr2u20ozE&callback=initMap" async defer></script>
+
+
+
+
+<script>
+      var map, infoWindow;
+function initMap() {
+map = new google.maps.Map(document.getElementById('map'), {
+  center:{lat:-29.4234202,lng:-66.8610222},
+            center:{lat:-29.4232566,lng:-66.8599978},
+            center:{lat:-29.4228669,lng:-66.858858},
+            center:{lat:-29.422765,lng:-66.8585231},
+            center:{lat:-29.4224577,lng:-66.8580744},
+            center:{lat:-29.4216867,lng:-66.8571049},
+            center:{lat:-29.4215231,lng:-66.85679},
+            center:{lat:-29.421348,lng:-66.8561411},
+            center:{lat:-29.4211753,lng:-66.8552937},
+            center:{lat:-29.4211682,lng:-66.8546606},
+            center:{lat:-29.421133,lng:-66.854073},
+            center:{lat:-29.420991,lng:-66.853547},
+            center:{lat:-29.420722,lng:-66.852965},
+            center:{lat:-29.4202944,lng:-66.852225},
+            center:{lat:-29.419577,lng:-66.851206},
+            center:{lat:-29.418883,lng:-66.850369},
+            center:{lat:-29.418021,lng:-66.849661},
+            center:{lat:-29.416818,lng:-66.8488696},
+            center:{lat:-29.4149755,lng:-66.8476935},
+            center:{lat:-29.4147218,lng:-66.8475688},
+            center:{lat:-29.4125058,lng:-66.8478757},
+            center:{lat:-29.4124044,lng:-66.8471289},
+            center:{lat:-29.4112269,lng:-66.8471772},
+            center:{lat:-29.4111942,lng:-66.8471155},
+            center:{lat:-29.410582,lng:-66.8471289},
+            center:{lat:-29.4097314,lng:-66.8470323},
+            center:{lat:-29.4080608,lng:-66.8464476},
+            center:{lat:-29.4079322,lng:-66.8463564},
+            center:{lat:-29.408,lng:-66.8484938},
+            center:{lat:-29.4079743,lng:-66.848542},
+            center:{lat:-29.407825,lng:-66.85039},
+            center:{lat:-29.4056941,lng:-66.851525},
+            center:{lat:-29.4063122,lng:-66.8523695},
+            center:{lat:-29.4067715,lng:-66.853191},
+            center:{lat:-29.407006,lng:-66.8544193},
+            center:{lat:-29.4071658,lng:-66.8560123},
+            center:{lat:-29.4073691,lng:-66.8584906},
+            center:{lat:-29.4074731,lng:-66.8598052},
+            center:{lat:-29.4075675,lng:-66.8601777},
+            center:{lat:-29.4078153,lng:-66.8606248},
+            center:{lat:-29.408082,lng:-66.8609587},
+            center:{lat:-29.4089744,lng:-66.8613231},
+            center:{lat:-29.4104603,lng:-66.8619504},
+            center:{lat:-29.4114321,lng:-66.8624872},
+            center:{lat:-29.4193887,lng:-66.8615294},
+            center:{lat:-29.4234202,lng:-66.8610222},
+  zoom: 16
+  
+});
+    
+
+     var trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+infoWindow = new google.maps.InfoWindow;
+
+
+// Try HTML5 geolocation.
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+
+    infoWindow.setPosition(pos);
+    infoWindow.setContent('Posicion Actual.');
+    infoWindow.open(map);
+    map.setCenter(pos);
+  }, function() {
+    handleLocationError(true, infoWindow, map.getCenter());
+  });
+} else {
+  // Browser doesn't support Geolocation
+  handleLocationError(false, infoWindow, map.getCenter());
+}
+}
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+infoWindow.setPosition(pos);
+infoWindow.setContent(browserHasGeolocation ?
+                      'Error: The Geolocation service failed.' :
+                      'Error: Your browser doesn\'t support geolocation.');
+infoWindow.open(map);
+}
+
+
+
+</script>
+
+<p><button onclick="initMap()" type="button" class="btn btn-success">Mostrar mi Ubicacion</button></p>
+<div id="out"></div>
+ 
+<div class="container p-5">
+  <div class="row">
+    <div class="col-sm-4 offset-md-4">
+      <div class="card animated flipInY">
+        <div class="card-header bg-dark text-white text-center">  
+          <h3>Salida</h3>
+        </div>
+        <div class="card-body">
+          <form action="http://localhost:3000/Salida" method="post" >
+            <div class="form-group">
+              <input class="form-control" type="text" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="apellido" placeholder="Apellido" required>
+              </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="patente" placeholder="Patente" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="horario_salida" placeholder="Horario de Salida" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="calle" placeholder="Nombre de la Calle" required>
+            </div>
+            <div class="form-group">
+              <textarea name="uid" id="sensor" cols="26" rows="1" placeholder="Uid"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" onclick="return alert('Estas Seguro?')" name="Entrada" class="btn btn-primary btn-block">     
+            </div>
+          </form>    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+</body>
+</html>

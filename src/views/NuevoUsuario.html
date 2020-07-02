@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkStation App </title>
+    <!-- CONEXION SOCKET IO -->
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="/rfid.js" ></script>  
+    <!-- BOOTSTRAP 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--FONT AWESONE-->
+    <script src="https://kit.fontawesome.com/27464e646d.js" crossorigin="anonymous"></script>
+    <!-- CUSTOM CSS-->
+    <link rel="stylesheet" href="/css/main.css">
+  
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container ">
+      <a class="navbar-brand" href="#">ParkStation App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i>Inicio</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/mapa"><i class="fas fa-map-marker-alt"></i>Mapa LR</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/usuarios"><i class="fas fa-users"></i></i>Usuarios</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+    <h1 align=center style="color:#FFF" class="">Bienvenido a ParkStation La Rioja</h1>
+    <div class="container p-5">
+        <div class="row">
+          <div class="col-sm-4 offset-md-4">
+            <div class="card animated flipInY">
+              <div class="card-header bg-dark text-white text-center">  
+                <h3>Registrar Usuario</h3>
+               
+              </div>
+              <div class="card-body">
+                <form action="http://localhost:3000/Registro" method="post" >
+                  <div class="form-group">
+                    <textarea name="uid" id="sensor" cols="26" rows="1" placeholder="Uid"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="nombre" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="apellido" placeholder="Apellido" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="patente" placeholder="Patente" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" name="Enviar" class="btn btn-primary btn-block">     
+                  </div>
+                </form>    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      
+</body>
+</html>
